@@ -1,13 +1,12 @@
 import css from "./App.module.css";
-import CafeInto from "../CafeInfo/CafeInfo";
+import CafeInfo from "../CafeInfo/CafeInfo";
 import VoteOptions from "../VoteOptions/VoteOptions"
-import type Votes from "../../types/votes";
-import type VoteType from "../../types/votes"
+import type {Votes,VoteType } from "../../types/votes";
 import { useState } from "react";
 import VoteStats from "../VoteStats/VoteStats"
 import Notification from "../Notification/Notification";
 
-/* import React from "react"; */
+
 
 const initialVotes: Votes = {
     good: 0,
@@ -17,10 +16,10 @@ const initialVotes: Votes = {
 
 export default function App() {
 
-    const [votes, setVotes] = useState(initialVotes);
+    const [votes, setVotes] = useState<Votes>(initialVotes);
     
-    const handleVote = (type: keyof VoteType) => {
-        setVotes(votes => ({
+    const handleVote = (type: VoteType) => {
+        setVotes((votes:Votes) => ({
             ...votes,
             [type]: votes[type] + 1,
         }));
@@ -42,7 +41,7 @@ export default function App() {
 
     return (
             <div className={css.app}>
-                <CafeInto />
+                <CafeInfo />
                 <VoteOptions
                     onVote={handleVote}
                     onReset={resetVotes}
